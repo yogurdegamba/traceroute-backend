@@ -23,6 +23,8 @@ app.listen(3001, () => {
 const Exec = (host, res) => {
     execFile("traceroute", [host], async (error, stdout, stderr) => {
     if (error) {
+        console.log("ERROR:", error)
+        console.log("STDERR:", stderr)
         res.status(500).send(stderr)
     }else{
         const lineas = stdout.split("\n")
