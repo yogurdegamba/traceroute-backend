@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <body style="background-color: black; color: white;">
+    <input id="dominio" type="text" placeholder="google.com" />
+    <button onclick="buscar()">Buscar</button>
+    <pre id="resultado"></pre>
+
+    <script>
+      async function buscar() {
+        const dominio = document.getElementById("dominio").value
+        const respuesta = await fetch(`http://localhost:3001/api/traceroute?host=${dominio}`)
+        const texto = await respuesta.json()
+        console.log(datos) 
+      }
+    </script>
+  </body>
+</html>
