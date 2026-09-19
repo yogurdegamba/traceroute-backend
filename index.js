@@ -13,7 +13,7 @@ app.get("/api/traceroute", (req, res) => {
   if (!host || !(/^[a-zA-Z0-9.-]+$/.test(host || ""))){
     res.status(400).send("Solicitud inválida por error de sintaxis")
   }else{
-    Exec(res,ipVisitante);
+    Exec(ipVisitante);
   }
 })
 
@@ -22,7 +22,7 @@ app.listen(3001, () => {
 })
 
 
-const Exec = async(res,ip) => {
+const Exec = async(ip) => {
     console.log(ip)
     const mapeo = await fetch(`http://ip-api.com/json/${ip}`)
     const ip_coordenadas = await mapeo.json()
