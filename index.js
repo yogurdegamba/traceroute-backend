@@ -10,7 +10,6 @@ app.use(cors())
 app.get("/api/traceroute", (req, res) => {
     const ipVisitante = query.ip;
   const host = req.query.host;
-  const ipVisitante = req.ip
   if (!host || !(/^[a-zA-Z0-9.-]+$/.test(host || ""))){
     res.status(400).send("Solicitud inválida por error de sintaxis")
   }else{
@@ -23,7 +22,7 @@ app.listen(3001, () => {
 })
 
 
-<<<<<<< HEAD
+
 const Exec = (host, res,ip) => {
     execFile("traceroute", [host], async (error, stdout, stderr) => {
     if (error) {
