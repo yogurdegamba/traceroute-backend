@@ -7,11 +7,12 @@ const app = express()
 app.use(cors())
 
 app.get("/api/traceroute", (req, res) => {
+    const ipVisitante = query.ip;
   const host = req.query.host;
   if (!host || !(/^[a-zA-Z0-9.-]+$/.test(host || ""))){
     res.status(400).send("Solicitud inválida por error de sintaxis")
   }else{
-    Exec(host,res);
+    Exec(host,res,ipVisitante);
   }
 })
 
@@ -20,7 +21,7 @@ app.listen(3001, () => {
 })
 
 
-const Exec = (host, res) => {
+const Exec = (host, res,ip) => {
     execFile("traceroute", [host], async (error, stdout, stderr) => {
     if (error) {
         console.log("ERROR:", error)
@@ -37,7 +38,7 @@ const Exec = (host, res) => {
         ips_validas = ips.filter(element => element!==null) //function(element) {return element!== null}
         console.log(ips_validas)
         console.log(ips_validas[1][0])
-        const resultados = []
+        const resultados = [ip]
         for (let i=0; i<ips_validas.length; i++){
             const mapeo = await fetch(`http://ip-api.com/json/${ips_validas[i][0]}`)
             const datos = await mapeo.json()
